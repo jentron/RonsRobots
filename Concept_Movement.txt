@@ -1,0 +1,47 @@
+Three logic levels:
+1. Top level decides where and how to drive. Calls middle level
+
+2. Middle level needed logic to calculate the correct orbit centers, waypoint positions, waypoints reached. It uses waypoint navigation to set the orbit point of the third level to achieve one of at least 3 behaviors:
+	A. Racetrack orbit, two orbits switched at the proper time to make an oval
+	B. Figure 8 orbit, two orbits switched at the proper time to make an 8
+	C. Snake, orbits are switch so the tank moves forward in an S pattern
+
+3. Lower level. Orbit and waypoint_reached logic
+// low level concept
+
+orbit()
+
+waypoint_reached()
+  calculate 1d closure velocity
+  if it is negative (eg moving away from waypoint)
+  then waypoint reached
+
+// Middle Level concept
+racetrack_calc()  // todo, logic to make bidirectional
+  constructor accepts two orbit centers
+  calculate two orbit exit waypoints, points where radius of orbit is perpendicular to vector between orbits
+  switch orbit centers when waypoint_reached()
+
+figureEight_calc()
+  constructor accepts one orbit and a direction (as a normal vector)
+  calculate 5 points:
+  center - direction * radius // outbound waypoint
+  center // orbit center
+  center + direction * radius  // crossover waypoint
+  center + direction * radius * 2  // orbit center
+  center + direction * radius * 3  // outbound waypoint
+
+  if waypoint_reached()
+    if outbound waypoint
+    then switch to crossover waypoint
+    else switch orbit center, outbound waypoint
+
+snake_calc
+  constructor accepts a direction (as a normal vector) or goal point
+  label1: calculate orbit as direction * 2 * radius + position
+          waypoint as direction * 3 * radius + position
+  orbit()
+  if waypoint_reached()
+  then goto label1
+     
+  

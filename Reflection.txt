@@ -1,0 +1,7 @@
+Reflection:
+What did you do to complete the task?
+What would you have changed?
+What roadblocks did you encounter?
+ I have no idea about how to create a robot
+What did you do to overcome these roadblocks?
+ Copy "MyFirstRobot" files to a new directory, and rename

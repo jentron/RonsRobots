@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/rjensen/Documents/Weber/CS1400/Robocode/libs/robocode.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Users/rjensen/Documents/Weber/CS1400/Robocode/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path=""/>
+</classpath>
