@@ -1,4 +1,4 @@
-package DeadRonsRobots;
+package utilities;
 
 public class OrbitTestStatic
 {
@@ -13,6 +13,7 @@ public class OrbitTestStatic
 class OrbitTest
 {
   public void burnin_test()
+//if I ever come back to this code comment it so I know what the hell it does
   {
      System.out.println("Burn-In");
      Orbit myOrbit = new Orbit();
@@ -21,7 +22,8 @@ class OrbitTest
   
   }
   
-  public void arc_test()
+  public void arc_test() 
+  // if I ever come back to this code comment it so I know what the hell it does
   {
      System.out.println("Arc Test");
      Orbit myOrbit = new Orbit();
