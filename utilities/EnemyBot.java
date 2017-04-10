@@ -1,4 +1,4 @@
-package RonsRobots;
+package utilities;
 
 import robocode.ScannedRobotEvent;
 /**

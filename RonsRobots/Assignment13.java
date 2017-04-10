@@ -8,7 +8,11 @@ import robocode.HitRobotEvent;
 import robocode.RobotStatus;
 import robocode.ScannedRobotEvent;
 import robocode.StatusEvent;
+import robocode.TurnCompleteCondition;
+import robocode.MoveCompleteCondition;
+
 import robocode.util.Utils;
+import utilities.EnemyBot;
 
 public class Assignment13 extends AdvancedRobot {
 	private double angle = 360;
@@ -75,6 +79,9 @@ public class Assignment13 extends AdvancedRobot {
 				scanAll();
 				break;
 			}
+			// execute all the queued moves
+//            waitFor(new TurnCompleteCondition(this));
+//            waitFor(new MoveCompleteCondition(this));
 			execute();
 		} // while forever loop
 
