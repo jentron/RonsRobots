@@ -15,7 +15,7 @@ import robocode.util.Utils;
 import utilities.EnemyBot;
 
 public class Assignment13 extends AdvancedRobot {
-	private double angle = 360;
+	private double angle = 45;
 	private double distance = 314;
 	private int opponents = 0;
 	private int totalOpponents = 0;
@@ -55,14 +55,14 @@ public class Assignment13 extends AdvancedRobot {
 				turnRadarRight(360);
 				break;
 			case Move:
-				int i = 0;
+				int target = 0;
 //				for(int i = 0; i< opponents ; i++ )
 //				{	
 					double gunHeading = getGunHeading();
-					double gunTurn = robocode.util.Utils.normalRelativeAngleDegrees(opponentBot[i].getBearing() - gunHeading);
+					double gunTurn = robocode.util.Utils.normalRelativeAngleDegrees(opponentBot[target].getBearing() - gunHeading);
 					setAdjustRadarForGunTurn(true);
 					setAdjustGunForRobotTurn(true);
-					System.out.println("Gun heading: " + gunHeading + ", OpponentDir: " + opponentBot[i].getBearing() + ", Turn Amount: " + gunTurn + " degrees.");
+					System.out.println("Gun heading: " + gunHeading + ", OpponentDir: " + opponentBot[target].getBearing() + ", Turn Amount: " + gunTurn + " degrees.");
 					if(Math.abs(gunTurn) > 1.0){
 						turnGunRight( gunTurn );						
 					} else {
@@ -72,10 +72,11 @@ public class Assignment13 extends AdvancedRobot {
 					
 //				}
 				double robotHeading = getHeading();
-				double robotTurn = robocode.util.Utils.normalRelativeAngleDegrees(opponentBot[i].getBearing() - robotHeading);// + random.nextInt(60) - 30.0);
+				double robotTurn = robocode.util.Utils.normalRelativeAngleDegrees(opponentBot[target].getBearing() - robotHeading + angle);// + random.nextInt(60) - 30.0);
 				setTurnRight(robotTurn);
-				distance = opponentBot[i].getDistance() / 2.0;
-				setAhead(distance - 10);
+				angle *= -1;
+				distance = opponentBot[target].getDistance();
+				setAhead(distance);
 				scanAll();
 				break;
 			}
@@ -126,8 +127,7 @@ public class Assignment13 extends AdvancedRobot {
 		}
 	
 		if (e.isMyFault()) {
-			turnRight(random.nextInt(180) - 90);
-			setAhead(-50);
+			turnRight(10);
 		}
 	} // onHitRobot
 	
