@@ -1,7 +1,7 @@
 package utilities;
 
 public class Vector3D {
-	double x, y, z;
+	public double x, y, z;
 	
 	public Vector3D(double x, double y, double z)
 	{
@@ -15,7 +15,31 @@ public class Vector3D {
 		this.y = y;
 		this.z = 0;
 	}
-	public double heading() // x/y angle
+	public Vector3D(Vector3D that)
+	{
+		this.x = that.x;
+		this.y = that.y;
+		this.z = that.z;
+	}
+	public void set(double x, double y, double z)
+	{
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+	public void set(double x, double y)
+	{
+		this.x = x;
+		this.y = y;
+		this.z = 0;
+	}
+	public void set(Vector3D that)
+	{
+		this.x = that.x;
+		this.y = that.y;
+		this.z = that.z;
+	}
+	public double angle() // x/y angle
 	{
 		return Math.atan2(this.y, this.x);
 	}
@@ -49,7 +73,7 @@ public class Vector3D {
 		this.y += that.y;
 		this.z += that.z;
 	}
-	public void subract(Vector3D that)
+	public void subtract(Vector3D that)
 	{
 		this.x -= that.x;
 		this.y -= that.y;

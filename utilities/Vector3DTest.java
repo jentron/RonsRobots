@@ -24,22 +24,22 @@ public class Vector3DTest {
 
 
 	/**
-	 * Test method for {@link utilities.Vector3D#heading()}.
+	 * Test method for {@link utilities.Vector3D#angle()}.
 	 */
 	@Test
-	public void testHeadingPIover4() {
+	public void testAnglePIover4() {
 		Vector3D testV = new Vector3D(1,1,0);
-		double theHeading = testV.heading();
-		assert(Math.abs(theHeading - Math.PI/4) < 0.001);
+		double theAngle = testV.angle();
+		assert(Math.abs(theAngle - Math.PI/4) < 0.001);
 	}
 	/**
-	 * Test method for {@link utilities.Vector3D#heading()}.
+	 * Test method for {@link utilities.Vector3D#angle()}.
 	 */
 	@Test
-	public void testHeadingNegative3PIover4() {
+	public void testAngleNegative3PIover4() {
 		Vector3D testV = new Vector3D(-1,-1,0);
-		double theHeading = testV.heading();
-		assert(Math.abs(theHeading + 3*Math.PI/4) < 0.001);
+		double theAngle = testV.angle();
+		assert(Math.abs(theAngle + 3*Math.PI/4) < 0.001);
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class Vector3DTest {
 	}
 
 	/**
-	 * Test method for {@link utilities.Vector3D#subract(utilities.Vector3D)}.
+	 * Test method for {@link utilities.Vector3D#subtract(utilities.Vector3D)}.
 	 */
 	@Test
 	public void testSubract() {
