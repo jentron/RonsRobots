@@ -60,12 +60,17 @@ public class Vector3D {
 		return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
 	}
 	public double dot(Vector3D that)
-	{ // FIXME not implemented
-		return 0.0;
+	{
+		return(
+				this.x * that.x +
+				this.y * that.y +
+				this.z * that.z);
 	}
 	public Vector3D cross(Vector3D that)
 	{// FIXME not implemented
-		return new Vector3D(0,0,1);
+		return new Vector3D(this.y*that.z - this.z*that.y,
+				this.z*that.x - this.x*that.z,
+				this.x*that.y - this.y*that.x);
 	}
 	public void add(Vector3D that)
 	{
