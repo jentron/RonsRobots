@@ -33,7 +33,7 @@ public class As13RateBot extends RateControlRobot {
 // since we do this first, it should be the total number of opponents
 		totalOpponents = getOthers();
 		opponentBot = new EnemyBot[totalOpponents];
-		for(int i = 0; i< totalOpponents; i++) opponentBot[i] = new EnemyBot();
+		for(int i = 0; i< totalOpponents; i++) opponentBot[i] = new EnemyBot(this);
 		boardCenter = new Vector3D(getWidth(),getHeight()); // first the width and height
 		boardCenter.multi(0.5); // then divide by 2
 		

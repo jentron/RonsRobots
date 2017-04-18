@@ -1,6 +1,7 @@
 package RonsRobots;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.util.Random;
 
 import robocode.AdvancedRobot;
@@ -8,10 +9,7 @@ import robocode.HitRobotEvent;
 import robocode.RobotStatus;
 import robocode.ScannedRobotEvent;
 import robocode.StatusEvent;
-import robocode.TurnCompleteCondition;
-import robocode.MoveCompleteCondition;
 
-import robocode.util.Utils;
 import utilities.EnemyBot;
 
 public class Assignment13 extends AdvancedRobot {
@@ -24,6 +22,7 @@ public class Assignment13 extends AdvancedRobot {
 	private enum Mode {Scan, Move};
 	private Mode mode = Mode.Scan;
 	private Random random = new Random();
+	private int target;
 
 	public void init(){
 		// Set colors
@@ -34,7 +33,7 @@ public class Assignment13 extends AdvancedRobot {
 // since we do this first, it should be the total number of opponents
 		totalOpponents = getOthers();
 		opponentBot = new EnemyBot[totalOpponents];
-		for(int i = 0; i< totalOpponents; i++) opponentBot[i] = new EnemyBot();
+		for(int i = 0; i< totalOpponents; i++) opponentBot[i] = new EnemyBot(this);
 		
 	}
 	
@@ -47,7 +46,7 @@ public class Assignment13 extends AdvancedRobot {
 		while (true) {
 			// Tell the game that when we take move,
 			// we'll also want to turn right... a lot.
-			System.out.println("Looping! "+ getHeading());
+			System.out.println("Looping! " + " Turn = " + getTime());
 			switch(mode)
 			{
 			case Scan:
@@ -57,7 +56,16 @@ public class Assignment13 extends AdvancedRobot {
 			case Move:
 				int target = 0;
 //				for(int i = 0; i< opponents ; i++ )
-//				{	
+				// CHALLENGE 2: Pick a the closest robot to target
+				for(int i = 1; i< opponents ; i++ )
+				{
+					if(opponentBot[i].getDistance() < opponentBot[target].getDistance())
+					{
+						target = i;
+					}
+				}
+				System.out.println("Targeting " + opponentBot[target].getName() + " who is " + opponentBot[target].getDistance() + " away");
+
 					double gunHeading = getGunHeading();
 					double gunTurn = robocode.util.Utils.normalRelativeAngleDegrees(opponentBot[target].getBearing() - gunHeading);
 					setAdjustRadarForGunTurn(true);
@@ -70,7 +78,7 @@ public class Assignment13 extends AdvancedRobot {
 						fireBullet(3);		
 					}
 					
-//				}
+// finally, move the tank
 				double robotHeading = getHeading();
 				double robotTurn = robocode.util.Utils.normalRelativeAngleDegrees(opponentBot[target].getBearing() - robotHeading + angle);// + random.nextInt(60) - 30.0);
 				setTurnRight(robotTurn);
@@ -136,5 +144,18 @@ public class Assignment13 extends AdvancedRobot {
 		RobotStatus es = e.getStatus();
 		es.getGunTurnRemaining();
 	}
+	
+	 // Paint a transparent square on top of the last scanned robot
+	 public void onPaint(Graphics2D g) {
+	     // Set the paint color to a red half transparent color
+	     g.setColor(new Color(0xff, 0x00, 0x00, 0x80));
+	 
+	     // Draw a line from our robot to the scanned robot
+	     g.drawLine(opponentBot[0].iX, opponentBot[0].iY, (int)getX(), (int)getY());
+	 
+	     // Draw a filled square on top of the scanned robot that covers it
+	     g.fillRect(opponentBot[0].iX - 20, opponentBot[0].iY - 20, 40, 40);
+	 }
+
 }
 

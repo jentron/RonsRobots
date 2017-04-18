@@ -1,5 +1,6 @@
 package utilities;
 
+import robocode.Robot;
 import robocode.ScannedRobotEvent;
 /**
  * EnemyBot is a class borrowed from https://github.com/AdyCastEX/u1l
@@ -14,9 +15,16 @@ public class EnemyBot
 	private double heading;
 	private double velocity;
 	private String name;
+    // Calculate the angle to the scanned robot
+    private double angle;
+    // Calculate the coordinates of the robot
+    public int iX;
+    public int iY;
+    private Robot me;
 	
-	public EnemyBot()
+	public EnemyBot(Robot that)
 	{
+		me = that;
 		reset();
 	}
 	
@@ -28,6 +36,9 @@ public class EnemyBot
 		this.heading = 0.0;
 		this.velocity = 0.0;
 		this.name = "";
+		this.angle = 0.0;
+		this.iX = 0;
+		this.iY = 0;
 	}
 	
 	public void update(ScannedRobotEvent e)
@@ -38,6 +49,12 @@ public class EnemyBot
 		this.heading = e.getHeading();
 		this.velocity = e.getVelocity();
 		this.name = e.getName();
+	     // Calculate the angle to the scanned robot
+		this.angle = (me.getHeading() + e.getBearing()) % 360;
+	 
+		// Calculate the coordinates of the robot
+		this.iX = (int)(me.getX() + Math.sin(Math.toRadians(angle)) * e.getDistance());
+		this.iY = (int)(me.getY() + Math.cos(Math.toRadians(angle)) * e.getDistance());
 	}
 	
 	public boolean none()
